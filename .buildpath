@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry external="true" kind="lib" path="/Users/newuser/Desktop/Pocketmine 1.6 Stuff/PocketMine-MP-9665dfd63eb75afafacee9e657dac6baaa3ee0fb/src"/>
+	<buildpathentry kind="src" path=""/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>

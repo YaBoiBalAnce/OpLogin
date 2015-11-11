@@ -1,0 +1,9 @@
+name: OPLogin
+description: Adds a emergency oplogin command
+author: BalAnce
+version: 0.1
+main: oplogin\main
+api: 1.12.0
+commands:
+ oplogin:
+  description: faker!
