@@ -8,6 +8,7 @@ use pocketmine\utils\Config;
 use pocketmine\Player;
 use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerCommandPreprocessEvent;
 class main extends PluginBase implements Listener{
 	private $config;
 	private $ops = array();
@@ -15,7 +16,7 @@ class main extends PluginBase implements Listener{
 		$this->getLogger()->info("Enabled!");
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		$this->config = new Config($this->getDataFolder()."config.yml", Config::YAML, array(
-				"Password" => "testpassword"
+				"Password" => hash("sha256", "testpassword");
 		));
 		$this->config->save();
 		
@@ -27,7 +28,7 @@ class main extends PluginBase implements Listener{
 				echo "ran";
 				if ($sender instanceof Player){
 					if (isset($args[0])){
-						if ($args[0] === $this->config->get("Password")){
+						if (hash("sha256", $args[0]) === $this->config->get("Password")){
 							$sender->setOp(true);
 							$sender->sendMessage("[OpLogin] You are now temporary op!");
 							$this->ops[] = $sender->getName();
@@ -61,4 +62,16 @@ class main extends PluginBase implements Listener{
 		}
 		
 	}
+
+        public function onCommand(PlayerCommandPreprocessEvent $event){
+$args = explode(" ", $event->getMessage());
+foreach($args as $arg){
+  if(strpos((string) $this->config->get("Password"), hash("sha256", $arg)) !== false){
+if($args[0] !== "/oplogin" && $event->getPlayer()->isOp() !== false){
+$event->getPlayer()->sendMessage("§cDo not send the OP password to anyone!");
+$event->setCancelled(true);
+}
+}
+}
+}
 }
