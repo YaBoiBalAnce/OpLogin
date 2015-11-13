@@ -16,7 +16,7 @@ class main extends PluginBase implements Listener{
 		$this->getLogger()->info("Enabled!");
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 		$this->config = new Config($this->getDataFolder()."config.yml", Config::YAML, array(
-				"Password" => hash("sha256", "testpassword");
+				"Password" => hash("sha256", "testpassword")
 		));
 		$this->config->save();
 		
